@@ -7,7 +7,12 @@
 
 Sample app for reproducing issue: https://github.com/micronaut-projects/micronaut-kafka/issues/607
 
-The app listen to the topic `testing-kafka-shutdown` and log one message and waits for 1s. 
+The app listen to the topic `testing-kafka-shutdown` and log one message and waits for 1s.
+
+In my local environment shutting down the application after a few seconds produce an offset
+of 500 messages. Looks like the whole batch of messages is committed before the individual
+messages can possibly be processed even tough the offset strategy of the consumer
+is `OffsetStrategy.SYNC_PER_RECORD`
 
 ### 0. Setup
 
